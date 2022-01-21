@@ -17,11 +17,8 @@ class Snake:
 
     def create_snake(self):
         for i in range(0, SNAKE_STARTING_LEN):
-            t = Turtle(shape="square")
-            t.penup()
-            t.color("white")
-            t.goto(x=i*-TURTLE_SIDE_SIZE, y=0)
-            self.segments.append(t)
+            position = (i*-TURTLE_SIDE_SIZE, 0)
+            self.add_segment(position)
 
     def move(self):
         """ move the snake in it's current direction """
@@ -48,3 +45,13 @@ class Snake:
         """ turn snake to face right if not currently facing left """
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    def extend(self):
+        self.add_segment(self.segments[-1].position())
+
+    def add_segment(self, position):
+        t = Turtle(shape="square")
+        t.penup()
+        t.color("white")
+        t.goto(position)
+        self.segments.append(t)
